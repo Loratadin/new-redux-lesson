@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Person from '../components/Person/Person';
 import AddPerson from '../components/AddPerson/AddPerson';
+import * as actionTypes from '../../store/actions';
 
 class Persons extends Component {
-    state = {
-        persons: []
-    }
-
+   
     personAddedHandler = () => {
         const newPerson = {
             id: Math.random(), // not really unique but good enough here!
@@ -29,16 +28,29 @@ class Persons extends Component {
         return (
             <div>
                 <AddPerson personAdded={this.personAddedHandler} />
-                {this.state.persons.map(person => (
+                {persons.map(person => (
                     <Person 
                         key={person.id}
                         name={person.name} 
                         age={person.age} 
-                        clicked={() => this.personDeletedHandler(person.id)}/>
+                        clicked={() => this.props.onPersonDelete(person.id)}/>
                 ))}
             </div>
         );
     }
 }
 
-export default Persons;
+const mapStateToProps = state => {
+    return {
+        persons: state.reducer.persons,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onPersonDelete: () => dispatch({type: actionTypes.DELETE, personId: id}),
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Persons);
