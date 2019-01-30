@@ -7,7 +7,7 @@ const initialState = {
 const reducer = (state = initialState, action) => { 
     switch (action.type) {
         case actionTypes.DELETE:
-            const updatedArray = state.persons.filter(person => person.id !== personId)
+            const updatedArray = state.persons.filter(person => person.id !== action.personId)
                 return {
                     ...state,
                     persons: updatedArray,
