@@ -23,6 +23,7 @@ const reducer = (state = initialState, action) => {
                 persons: state.persons.concat(newPerson)
             }
     }
+    return state;
 }
 
 export default reducer;
