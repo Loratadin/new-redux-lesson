@@ -4,8 +4,8 @@ import './AddPerson.css';
 
 export default class AddPerson extends Component {
     state = {
-        name: "",
-        age: null,
+        name: " ",
+        age: " ",
     }
 
     nameChangedHandler = event => {
@@ -20,7 +20,7 @@ export default class AddPerson extends Component {
             <div className="AddPerson">
                 <input
                     type="text"
-                    placeholder="Name"
+                    placeholder="Enter Name"
                     onChange={this.nameChangedHandler}
                     value={this.state.name}
                 />
@@ -30,7 +30,7 @@ export default class AddPerson extends Component {
                     onChange={this.ageChangedHandler}
                     value={this.state.age}
                 />
-                <button onClick={this.props.personAdded}>Add Person</button>
+                <button onClick={() => this.props.personAdded(this.state.name, this.state.age)}>Add Person</button>
             </div>
         );        
     }
